@@ -1,0 +1,116 @@
+<div id="container-questionnaire">
+    <h1>Main Task Complete</h1>
+
+    <hr>
+
+    <p>You are almost done! Thank you for your contributions to science. Please answer the following questions, and then you will have a short color rating task.</p>
+
+    <div class="instructions well">
+
+        <form id="postquiz" action="debrief" method="post">
+
+          <!-- beginning of a question -->
+          <div class="row question">
+              <div class="col-md-8">
+                  How many items do you think you remembered correctly at test?
+              </div>
+              <div class="col-md-4">
+                  <select id="num_correct" name="num_correct">
+                      <option value="All">All</option>
+                      <option value="Nearly all">Nearly all</option>
+                      <option value="Most">Most</option>
+                      <option value="Several">Several</option>
+                      <option value="A few">A few</option>
+                      <option value="None" SELECTED>None</option>
+                  </select>
+              </div>
+          </div>
+          <!-- end of a question -->
+
+          <div class="row question">
+              <div class="col-md-8">
+                  In the end, how did you like the pace that you chose?
+              </div>
+              <div class="col-md-4">
+                  <select id="pace" name="pace">
+                      <option value="fast">It was too fast</option>
+                      <option value="good" SELECTED>It was a good pace</option>
+                      <option value="slow">It was too slow</option>
+                  </select>
+              </div>
+          </div>
+
+          <!-- beginning of a question -->
+          <div class="row question">
+              <div class="col-md-8">
+                  Did you use any external memory aids (e.g., writing something down or taking screenshots)? Please be honest; you will be paid regardless of your answer.
+              </div>
+              <div class="col-md-4">
+                  <select id="memory_aid" name="memory_aid">
+                      <option value="no">No</option>
+                      <option value="yes" SELECTED>Yes</option>
+                  </select>
+              </div>
+          </div>
+          <!-- end of a question -->
+
+            <!-- beginning of a question -->
+            <div class="row question">
+                <div class="col-md-8">
+                    On a scale of 1-7 (where 7 is the most engaged), please rate how <b>ENGAGING</b> you found the learning task:
+                </div>
+                <div class="col-md-4">
+                    <select id="engagement" name="engagement">
+                        <option value="7">7 - Very engaging</option>
+                        <option value="6">6</option>
+                        <option value="5">5</option>
+                        <option value="4" SELECTED>4 - Moderately</option>
+                        <option value="3">3</option>
+                        <option value="2">2</option>
+                        <option value="1">1 - Not engaged</option>
+                    </select>
+                </div>
+            </div>
+            <!-- end of a question -->
+
+
+            <!-- beginning of a question -->
+            <div class="row question">
+                <div class="col-md-8">
+                    On a scale of 1-7 (where 7 is the most difficult), please rate how <b>DIFFICULT</b> you found the learning task:
+                </div>
+                <div class="col-md-4">
+                    <select id="difficulty" name="difficulty">
+                        <option value="7">7 - Very difficult</option>
+                        <option value="6">6</option>
+                        <option value="5">5</option>
+                        <option value="4" SELECTED>4 - Moderately difficult</option>
+                        <option value="3">3</option>
+                        <option value="2">2</option>
+                        <option value="1">1 - Not difficult at all</option>
+                    </select>
+                </div>
+            </div>
+            <!-- end of a question -->
+
+        </form>
+    </div>
+
+    <hr>
+
+    <div class="instructionsnav">
+        <div class="row">
+            <div class="col-xs-2">
+            </div>
+            <div class="col-xs-7">
+            </div>
+            <div class="col-xs-3">
+                <button type="button" id="next" value="next" class="btn btn-primary btn-lg continue">
+                    Continue <span class="glyphicon glyphicon-arrow-right"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+</div>

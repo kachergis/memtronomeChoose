@@ -1,0 +1,109 @@
+<div id="container-instructions">
+
+	<h1>Instructions</h1>
+
+	<hr>
+
+	<div class="instructions well">
+
+    <form id="instruct-quiz" action="instructioncheck" method="post">
+
+      <div class="row question">
+          <div class="col-md-8">
+              What will you be doing in this HIT?
+          </div>
+          <div class="col-md-4">
+              <fieldset>
+                  <input type="radio" name="q1"> Arithmetic<br />
+									<input type="radio" name="q1" id="icheck1"> Choose pace and study<br />
+                  <input type="radio" name="q1"> Anatomy<br />
+              </fieldset>
+          </div>
+      </div>
+
+			<div class="row question">
+          <div class="col-md-8">
+              Can you finish faster by choosing a fast pace?
+          </div>
+          <div class="col-md-4">
+              <fieldset>
+                  <input type="radio" name="q5"> Yes<br />
+                  <input type="radio" name="q5" id="icheck5"> No<br />
+              </fieldset>
+          </div>
+      </div>
+
+      <div class="row question">
+          <div class="col-md-8">
+              What should you use to study?
+          </div>
+          <div class="col-md-4">
+            <fieldset>
+              <input type="radio" name="q2"> Pen and paper<br />
+              <input type="radio" name="q2"> A camera<br />
+              <input type="radio" name="q2" id="icheck2"> Your memory<br />
+            </fieldset>
+          </div>
+      </div>
+
+      <div class="row question">
+          <div class="col-md-8">
+            Will you be tested on what you can remember?
+          </div>
+          <div class="col-md-4">
+            <fieldset>
+              <input type="radio" name="q3" id="icheck3"> Yes<br />
+              <input type="radio" name="q3"> No<br />
+            </fieldset>
+        </div>
+      </div>
+
+      <div class="row question">
+            <div class="col-md-8">
+              Why do we do this?
+            </div>
+            <div class="col-md-4">
+              <fieldset>
+                <input type="radio" name="q4"> To waste my time<br />
+                <input type="radio" name="q4" id="icheck4"> For science!<br />
+              </fieldset>
+          </div>
+      </div>
+
+    </form>
+
+    <p> You will be able to move on when you have answered all the questions correctly.</p>
+    <div id="checkquiz" style="width:500px;margin:0 auto">
+          <button type="button" name="button" class="btn btn-primary btn-lg" onclick="instructioncheck()">Check answers</button>
+    </div>
+
+	    <script type="text/javascript">
+	    //console.log(psiTurk.getInstructionIndicator())
+	    </script>
+
+	</div>
+
+	<hr>
+
+
+  <div class="instructionsnav">
+      <div class="row">
+          <div class="col-xs-2">
+              <button type="button" id="next" value="next" class="btn btn-primary btn-lg previous">
+              <span class="glyphicon glyphicon-arrow-left"></span> Previous
+              </button>
+          </div>
+          <div class="col-xs-8">
+          </div>
+          <!-- hide until questions answered correctly -->
+          <div class="col-xs-2">
+            <div id="instructquizcorrect" style="display:none">
+              <button type="button" id="next" value="next" class="btn btn-primary btn-lg continue">
+              Next <span class="glyphicon glyphicon-arrow-right"></span>
+              </button>
+            </div>
+          </div>
+      </div>
+  </div>
+
+</div>
