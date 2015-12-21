@@ -1,6 +1,6 @@
 [HIT Configuration]
 title = Memory and Timing
-description = Learn words in an alien language.
+description = Test your memory!
 amt_keywords = Psychology, Learning
 lifetime = 24
 us_only = true
