@@ -7,8 +7,8 @@
     <div class="instructions well">
 
         <p>
-            Great! Now you will choose the pace at which items will be presented during the experiment. The idea is similar to
-            controlling how fast someone is talking to you. Please choose a speed that you think will work best for your memory.
+            Great! Now you will choose the pace at which <b>some</b> of the items will be presented during the experiment. The idea is similar to
+            controlling how fast someone is talking to you. Please choose a speed that you think will work best for your memory. <span id="blockedinstr"></span>
         </p>
         <p>
             On the next page, you will use the slider to adjust the time between object presentations until you are happy with the speed. Choose a speed that you think will best allow to you to remember what you see.
@@ -20,6 +20,9 @@
 
         <script type="text/javascript">
         //console.log(psiTurk.getInstructionIndicator())
+        if(condition==="0") {
+          document.getElementById("blockedinstr").innerHTML = 'When you see items at your chosen pace, the screen will say "(You chose)". When we choose the pace, the screen will say "(We chose)".';
+        }
         </script>
 
     </div>

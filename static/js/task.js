@@ -12,12 +12,13 @@ var mycounterbalance = counterbalance;  // they tell you which condition you hav
 
 var condition_name = "";
 // orig ISI_LEVELS = [500,2000,4000];
-//var ISI_LEVELS = [100,1000,2000,3000,6000,9000,12000]; // use each ISI for num_items_studied/4 items
+//[100,1000,2000,3000,6000,9000,12000]; // use each ISI for num_items_studied/4 items
+var ISI_LEVELS = []; // fill with [chosenISI-500, chosenISI, chosenISI+500]
 var TEST_ISI = 500;
 
 var ISI = 500; // default, but they will tune this as desired with a slider
-var MIN_ISI = 100;
-var MAX_ISI = 3000;
+var MIN_ISI = 600; //100;
+var MAX_ISI = 2500; //3000;
 var num_items_studied = 60; // CHANGE TO A SMALL NUMBER FOR TESTING
 var list_repetitions = 1;
 var time_per_stimulus = 750;
@@ -74,7 +75,7 @@ var instructionFiller = [
 	"instructions/instruct-filler.html"
 ];
 
-var database = new Firebase('https://memtronomechoose.firebaseio.com');
+var database = new Firebase('https://memtronomechoose2.firebaseio.com');
 var dbstudy = database.child("study"); // store data from each phase separately
 var dbtest = database.child("test");
 var dbinstructq = database.child("instructquiz");
@@ -188,6 +189,16 @@ var ChooseISI = function() {
 }
 
 var Experiment = function(myISI) {
+	ISI_LEVELS = [myISI-500, myISI, myISI+500];
+	var ISIlevels = _.shuffle(ISI_LEVELS);
+	var stim_per_ISI = num_items_studied/ISI_LEVELS.length;
+	var ISI = [];
+	for(i=0; i<ISIlevels.length; i++) {
+		for(j=0; j<stim_per_ISI; j++) {
+			ISI.push(ISIlevels[i]);
+		}
+	}
+
 	var wordon, // time word is presented
 	    listening = false;
 
@@ -196,13 +207,22 @@ var Experiment = function(myISI) {
 
 	// give test subjects an id/condition:
 	if(uniqueId==='') {
+		var conds = ["0","1"];
 		uniqueId = Math.floor((Math.random() * 1000000) + 1);
-		mycondition = "0";
+		mycondition = conds[Math.floor(Math.random()*conds.length)];
 	}
 
 	//var ISI = ISI_LEVELS[parseInt(mycondition)]; // same ISI for all objects -- this is all we need!
-	condition_name = "chooseISI";
-	ISItype = "chosen";
+	//condition_name = "chooseISI";
+	//ISItype = "chosen";
+	if(mycondition==="0") {
+		ISItype = 'blocked';
+		condition_name = "blockedISIchoose"; // maybe randomize if increasing or decreasing by block
+	} else if(mycondition==="1") {
+		ISItype = 'random';
+		condition_name = "randomISIchoose";
+		ISI = _.shuffle(ISI); // is this enough?
+	}
 
 	console.log("mycondition: "+mycondition+" condition_name: "+condition_name);
 
@@ -215,7 +235,7 @@ var Experiment = function(myISI) {
 	//words = _.shuffle(VERBAL_STIM);
 	var stimuli = []; // take first N
 	for(i = 0; i<num_items_studied; i++) {
-		stimuli.push({"obj":objs[i], "ISI":myISI, "index":i+1, "type":"old"}); // "word":words[i],
+		stimuli.push({"obj":objs[i], "ISI":ISI[i], "index":i+1, "type":"old"}); // "word":words[i],
 	}
 
 	var trials = stimuli.slice(); // study trials
@@ -236,6 +256,14 @@ var Experiment = function(myISI) {
 			finish();
 		}
 		else {
+			// in blocked condition, inform them when they are
+			if(condition_name === "blockedISIchoose") {
+				if(trials[0].ISI===myISI) {
+					d3.select("#prompt").html('<h1>Remember! (You chose)</h1>');
+				} else {
+					d3.select("#prompt").html('<h1>Remember! (We chose)</h1>');
+				}
+			}
 			var stim = trials.shift();
 			//var time = stim.ISI;
 			wordon = new Date().getTime();
@@ -243,6 +271,7 @@ var Experiment = function(myISI) {
 			show_stim( [stim], time_per_stimulus + stim.ISI, wordon );
 		}
 	};
+
 
 	var finish = function() {
 		d3.select("body").on("keydown", null);
